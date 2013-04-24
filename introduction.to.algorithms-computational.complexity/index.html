@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Introduction to Algorithms: Computational Complexity</title>
+
+		<meta name="description" content="Introduction to Algorithms: Computational Complexity">
+		<meta name="author" content="Vasyl Nakvasiuk">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Introduction to Algorithms:</h1>
+					<h1>Computational Complexity</h1>
+					<h3>by Vasyl Nakvasiuk, 2013</h3>
+
+					<img src="static/images/hangout-logo.png" style="width: 15.0%;border: 0;margin: 0;background: none;box-shadow: none;">
+				</section>
+
+				<section>
+					<h1>What is an algorithm?</h1>
+				</section>
+
+				<section>
+					<h2>What is an Algorithm?</h2>
+					<br>
+					<blockquote>
+						An algorithm is a procedure that takes any of the possible input instances and transforms it to the desired output.
+					</blockquote>
+					<br>
+					<br>
+					<p>Important issues: correctness, elegance and <span style="color: #40FF00">efﬁciency<span>.</p>
+
+				</section>
+
+				<section>
+					<h1>Eﬃciency</h1>
+					<p class="fragment fade-in">Is this really necessary?</p>
+				</section>
+
+				<section>
+					<h2>Criteria of eﬃciency:</h2>
+					<ul>
+						<li class="fragment highlight-green grow">Time complexity</li>
+						<li>Space complexity</li>
+					</ul>
+					<br>
+					<br>
+					<br>
+
+					<p class="fragment">
+						Time complexity &ne; Space complexity &ne; Complexity of algorithm
+					</p>
+				</section>
+
+				<section>
+					<h1>How can we measure complexity?</h1>
+				</section>
+
+				<section>
+					<h2>How can we measure complexity?</h2>
+					<br>
+					<h3>Empirical Analysis (<span class="fragment highlight-green">Benchmarks<span>)</h3>
+					<h3>Theoretical Analysis (<span class="fragment highlight-green">Asymptotic analysis<span>)</h3>
+				</section>
+
+				<section>
+					<h1>Benchmarks</h1>
+					<h3>Empirical Analysis</h3>
+				</section>
+
+				<section>
+					<h2>Benchmarks</h2>
+					<h4>Version #1</h4>
+					<img class="fragment fade-in" src="static/images/s-kepom_17171954_orig_.jpg" width="800" height="298" />
+					<br>
+					<h2 class="fragment fade-in">What means <span style="color: #FA5858">&ldquo;fast&rdquo;</span>?</h2>
+				</section>
+
+				<section>
+					<h2>Benchmarks</h2>
+					<h4>Version #2</h4>
+					<pre class="fragment fade-in"><code class="python">
+import time
+
+start = time.time() # Return the time in seconds since the epoch.
+my_algo()
+end = time.time()
+
+print(end - start)
+					</code></pre>
+					<pre class="fragment fade-in"><code>
+0.048032498359680176
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Benchmarks</h2>
+					<h4>Version #3</h4>
+					<pre class="fragment fade-in"><code class="python">
+import timeit
+
+timeit.timeit('my_algo()')
+					</code></pre>
+					<pre class="fragment fade-in"><code>
+10 loops, best of 3: 50.3 ms per loop
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Benchmarks</h2>
+					<h4>Version #4</h4>
+					<pre class="fragment fade-in"><code class="python">
+import timeit
+
+inputs = [1000, 10000, 500000, 1000000]
+
+for input in inputs:
+    timeit.timeit('my_algo(input)')
+					</code></pre>
+					<pre class="fragment fade-in"><code>
+list of 1000 items:
+10 loops, best of 3: 50.3 ms per loop
+
+list of 10000 items:
+10 loops, best of 3: 104.7 ms per loop
+
+list of 500000 items:
+10 loops, best of 3: 459.1 ms per loop
+
+list of 1000000 items:
+10 loops, best of 3: 3.12 s per loop
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Benchmarks</h2>
+					<h4>Version #5</h4>
+					<pre class="fragment fade-in"><code class="python">
+# Intel Core i7-3970X @ 3.50GHz, RAM 8 Gb, Ubuntu 12.10 x64, Python 3.3.0
+
+import timeit
+
+inputs = [1000, 10000, 500000, 1000000]
+
+for input in inputs:
+    timeit.timeit('my_algo(input)')
+					</code></pre>
+					<pre class="fragment fade-in"><code>
+list on 1000 items:
+10 loops, best of 3: 50.3 ms per loop
+
+list on 10000 items:
+10 loops, best of 3: 104.7 ms per loop
+
+list on 500000 items:
+10 loops, best of 3: 459.1 ms per loop
+
+list on 1000000 items:
+10 loops, best of 3: 3.12 s per loop
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Experimental studies have several limitations:</h2>
+					<br>
+					<ul>
+						<li>It is necessary to <span style="color: #FA5858">implement</span> and test the algorithm in order to determine its running time.</li>
+						<li>Experiments can be done only on a <span style="color: #FA5858">limited set of inputs</span>, and may not be indicative of the running time on other inputs not included in the experiment.</li>
+						<li>In order to compare two algorithms, <span style="color: #FA5858">the same hardware and software environments</span> should be used.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Asymptotic analysis</h1>
+					<h3>Theoretical Analysis</h3>
+				</section>
+
+				<section>
+					<h2>Asymptotic analysis</h2>
+					<h4>Eﬃciency as a function of input size</h4>
+					<br>
+					<p><span style="color: #40FF00">T(n)</span> – running time as a function of n, where n – size of input.</p>
+					<p class="fragment fade-in">n &rarr; <span style="color: #40FF00">&infin;</span></p>
+					<p class="fragment fade-in">Random-Access Machine (<span style="color: #40FF00">RAM</span>)</p>
+				</section>
+
+				<section>
+					<h2>Best, worst, and average-case complexity</h2>
+					<br>
+					<h3>Linear search</h3>
+					<pre><code class="python">
+def linear_search(my_item, items):
+    for position, item in enumerate(items):
+        if my_item == item:
+            return position
+					</code></pre>
+
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = n ?</p>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = 1/2 &sdot; n ?</p>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = 1 ?</p>
+				</section>
+
+				<section>
+					<h2>Best, worst, and average-case complexity</h2>
+					<br>
+					<img src="static/images/best-worst-and-average-case-complexity.jpg" width="587" height="387" />
+				</section>
+
+				<section>
+					<h2>Best, worst, and average-case complexity</h2>
+					<br>
+					<h3>Linear search</h3>
+					<pre><code class="python">
+def linear_search(my_item, items):
+    for position, item in enumerate(items):
+        if my_item == item:
+            return position
+					</code></pre>
+
+					<p><span class="fragment grow highlight-red">Worst case</span>: <span style="color: #40FF00">T(n)</span> = n</p>
+					<p>Average case: <span style="color: #40FF00">T(n)</span> = 1/2 &sdot; n</p>
+					<p>Best case: <span style="color: #40FF00">T(n)</span> = 1</p>
+					<br>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = O(n)</p>
+				</section>
+
+				<section>
+					<h1>How can we compare two functions?</h1>
+					<br>
+					<h1 class="fragment fade-in">We can use <span style="color: #40FF00">Asymptotic notation</span></h1>
+				</section>
+
+				<section>
+					<h1>Asymptotic notation</h1>
+				</section>
+
+				<section>
+					<h2>The Big Oh Notation</h2>
+					<h3>Asymptotic upper bound</h3>
+					<br>
+					<p>O(g(n)) = {f(n): there exist positive constants c and n<sub>0</sub> such that 0 &le; f(n) &le; c&sdot;g(n) for all n &ge; n<sub>0</sub>}</p>
+					<br>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> &isin; O(g(n))</p>
+					<p class="fragment fade-in">or</p>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = O(g(n))</p>
+				</section>
+
+				<section>
+					<h2>&Omega;-Notation</h2>
+					<h3>Asymptotic lower bound</h3>
+					<br>
+					<p>&Omega;(g(n)) = {f(n): there exist positive constants c and n<sub>0</sub> such that 0 &le; c&sdot;g(n) &le; f(n) for all n &ge; n<sub>0</sub>}</p>
+					<br>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> &isin; &Omega;(g(n))</p>
+					<p class="fragment fade-in">or</p>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = &Omega;(g(n))</p>
+				</section>
+
+				<section>
+					<h2>&Theta;-Notation</h2>
+					<h3>Asymptotic tight bound</h3>
+					<br>
+					<p>&Theta;(g(n)) = {f(n): there exist positive constants c<sub>1</sub>, c<sub>2</sub> and n<sub>0</sub> such that 0 &le; c<sub>1</sub>&sdot;g(n) &le; f(n) &le; c<sub>2</sub>&sdot;g(n) for all n &ge; n<sub>0</sub>}</p>
+					<br>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> &isin; &Theta;(g(n))</p>
+					<p class="fragment fade-in">or</p>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = &Theta;(g(n))</p>
+				</section>
+
+				<section>
+					<h2>Graphic examples of the &Theta;, O and &Omega; notations</h2>
+					<br>
+					<img src="static/images/theta-o-omega-graph-example.jpg" width="871" height="283" />
+				</section>
+
+				<section>
+					<h2>Examples</h2>
+					<br>
+					<p>
+						<span style="color: #40FF00">3&sdot;n<sup>2</sup> - 100&sdot;n + 6 = O(n<sup>2</sup>)</span>,<br>
+						because we can choose <span style="color: #FA5858">c = 3</span> and <span style="color: #40FF00">3&sdot;n<sup>2</sup></span> > <span style="color: #40FF00">3&sdot;n<sup>2</sup> - 100&sdot;n + 6</span>
+					</p>
+					<br>
+					<p>
+						<span style="color: #40FF00">100&sdot;n<sup>2</sup> - 70&sdot;n - 1 = O(n<sup>2</sup>)</span>,<br>
+						because we can choose <span style="color: #FA5858">c = 100</span> and <span style="color: #40FF00">100&sdot;n<sup>2</sup></span> > <span style="color: #40FF00">100&sdot;n<sup>2</sup> - 70&sdot;n - 1</span>
+					</p>
+					<br>
+					<p class="fragment fade-in">
+						<span style="color: #40FF00">3&sdot;n<sup>2</sup> - 100&sdot;n + 6</span>
+						&asymp;
+						<span style="color: #40FF00">100&sdot;n<sup>2</sup> - 70&sdot;n - 1</span>
+					</p>
+				</section>
+
+				<section>
+					<h2>Linear search (Villabajo version)</h2>
+					<br>
+					<h3>Linear search</h3>
+					<pre><code class="python">
+def linear_search(my_item, items):
+    for position, item in enumerate(items):
+        print('poition – {0}, item – {0}'.format(position, item))
+        print('Compare two items.')
+        if my_item == item:
+            print('Yeah!!!')
+            print('The end!')
+            return position
+					</code></pre>
+
+					<br>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = O(3&sdot;n + 2) = O(n)</p>
+					<p class="fragment fade-in">
+						Speed of <span style="color: #40FF00">"Villarriba version"</span> &asymp;
+						Speed of <span style="color: #40FF00">"Villabajo version"</span>
+					</p>
+				</section>
+
+				<section>
+					<h2>Binary search</h2>
+					<br>
+					<pre><code class="python">
+def binary_search(seq, t):
+    min = 0; max = len(seq) - 1
+    while 1:
+        if max < min:
+            return -1
+        m = (min + max) / 2
+        if seq[m] < t:
+            min = m + 1
+        elif seq[m] > t:
+            max = m - 1
+        else:
+            return m
+					</code></pre>
+					<br>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = O(log(n))</p>
+				</section>
+
+				<section>
+					<h2>Real usage</h2>
+					<h3>Add DB &ldquo;index&rdquo;</h3>
+					<br>
+					<img src="static/images/db-index.png" width="532" height="378" />
+				</section>
+
+
+				<section>
+					<h2>Types of Order</h2>
+					<img src="static/images/types-of-order.png" width="824" height="445" />
+				</section>
+
+				<section>
+					<h2>The Big Oh complexity for different functions</h2>
+					<br>
+					<img src="static/images/big-o-complexity.png" width="783" height="454" />
+				</section>
+
+				<section>
+					<h2>Growth rates of common functions measured in nanoseconds</h2>
+					<p>Each operation takes one nanosecond (10<sup>-9</sup> seconds).</p>
+					<br>
+					<img src="static/images/growth-rates-of-common-functions.jpg" width="871" height="283" />
+				</section>
+
+				<section>
+					<h2>How can you quickly find out complexity?</h2>
+					<h3>O(?)</h3>
+					<br>
+					<img class="fragment fade-in" src="static/images/joda-feel.jpg" width="400" height="398" />
+				</section>
+
+				<section>
+					<blockquote>
+						On the basis of the issues discussed here, I propose that members of SIGACT, and editors of computer science and mathematics journals, adopt the O, &Omega; and &Theta; notations as defined above, unless a better alternative can be found reasonably soon.
+					</blockquote>
+					<br>
+					<p style="font-size: 20px;">D. E. Knuth, "Big Omicron and Big Omega and BIg Theta", SIGACT News, 1976.</p>
+				</section>
+
+				<section>
+					<h1>Benchmarks<br>
+						or<br>
+						Asymptotic analysis?
+					</h1>
+					<br>
+					<h1 class="fragment fade-in" style="color: #40FF00">Use both approaches!</h1>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ol>
+						<li>We want to predict running time of an algorithm.</li>
+						<li>Summarize all possible inputs with a single &ldquo;size&rdquo; parameter n.</li>
+						<li>Many problems with &ldquo;empirical&rdquo; approach (measure lots of test cases with various n and then extrapolate).</li>
+						<li>Prefer &ldquo;analytical&rdquo; approach.</li>
+						<li>To select best algorithm, compare their <span style="color: #40FF00">T(n)</span> functions.</li>
+						<li>To simplify this comparision &ldquo;round&rdquo; the function using asymptotic (&ldquo;big-O&rdquo;) notation</li>
+						<li>Amazing fact: Even though asymptotic complexity analysis makes many simplifying assumptions, it is remarkably useful in practice: if A is <span style="color: #40FF00">O(n<sup>3</sup>)</span> and B is <span style="color: #40FF00">O(n<sup>2</sup>)</span> then B really will be <span style="color: #40FF00">faster</span> than A, no matter how they’re implemented.</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Links</h2>
+					<br>
+					<h4>Books:</h4>
+					<ul>
+						<li>"Introduction To Algorithms, Third Edition", 2009, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein</li>
+						<li>"The Algorithm Design Manual, Second Edition", 2008, by Steven S. Skiena</li>
+					</ul>
+					<br>
+					<br>
+
+					<h4>Other:</h4>
+					<ul>
+						<li>"Algorithms: Design and Analysis" by Tim Roughgarden
+							<br><a href="https://www.coursera.org/course/algo">https://www.coursera.org/course/algo</a>
+						</li>
+						<li>Big-O Algorithm Complexity Cheat Sheet
+							<br><a href="http://bigocheatsheet.com/">http://bigocheatsheet.com/</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>The end</h2>
+					<br>
+					<h3 style="color: #FA5858">Thank you for attention!</h3>
+					<ul>
+						<li>Vasyl Nakvasiuk</li>
+						<li>Email: vaxxxa@gmail.com</li>
+						<li>Twitter: @vaxXxa</li>
+						<li>Github: vaxXxa</li>
+					</ul>
+					<br>
+					<br>
+					<h3 style="color: #40FF00">This presentation:</h3>
+					<a href="http://vaxxxa.github.io/talks/">http://vaxxxa.github.io/talks/</a>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
