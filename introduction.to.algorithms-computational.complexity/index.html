@@ -100,7 +100,7 @@
 				<section>
 					<h2>Benchmarks</h2>
 					<h4>Version #1</h4>
-					<img class="fragment fade-in" src="static/images/s-kepom_17171954_orig_.jpg" width="800" height="298" />
+					<img class="fragment fade-in" src="static/images/captain-jean-luc-picard-facepalm.jpg" width="800" height="298" />
 					<br>
 					<h2 class="fragment fade-in">What means <span style="color: #FA5858">&ldquo;fast&rdquo;</span>?</h2>
 				</section>
@@ -356,6 +356,39 @@ def linear_search(my_item, items):
 				</section>
 
 				<section>
+					<h2>Types of Order</h2>
+					<img src="static/images/types-of-order.png" width="824" height="445" />
+					<br>
+					<div class="fragment fade-in">
+						<p>However, all you really need to understand is that:</p>
+						<p>
+							<span style="color: #40FF00">n!</span> ≫
+							<span style="color: #40FF00">2<sup>n</sup></span> ≫
+							<span style="color: #40FF00">n<sup>3</sup></span> ≫
+							<span style="color: #40FF00">n<sup>2</sup></span> ≫
+							<span style="color: #40FF00">n&sdot;log(n)</span> ≫
+							<span style="color: #40FF00">n</span> ≫
+							<span style="color: #40FF00">log(n)</span> ≫
+							<span style="color: #40FF00">1</span>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>The Big Oh complexity for different functions</h2>
+					<br>
+					<img src="static/images/big-o-complexity.png" width="783" height="454" />
+				</section>
+
+				<section>
+					<h2>Growth rates of common functions measured in nanoseconds</h2>
+					<p>Each operation takes one nanosecond (10<sup>-9</sup> seconds).</p>
+					<p>CPU &asymp; 1 GHz</p>
+					<br>
+					<img src="static/images/growth-rates-of-common-functions.jpg" width="706" height="252" />
+				</section>
+
+				<section>
 					<h2>Binary search</h2>
 					<br>
 					<pre><code class="python">
@@ -378,41 +411,20 @@ def binary_search(seq, t):
 
 				<section>
 					<h2>Practical usage</h2>
-					<h3>Add DB &ldquo;index&rdquo;</h3>
-					<br>
-					<img src="static/images/db-index.png" width="532" height="378" />
-				</section>
-
-
-				<section>
-					<h2>Types of Order</h2>
-					<img src="static/images/types-of-order.png" width="824" height="445" />
-					<br>
-					<br>
-					<p>However, all you really need to understand is that:</p>
-					<p>
-						<span style="color: #40FF00">n!</span> ≫
-						<span style="color: #40FF00">2<sup>n</sup></span> ≫
-						<span style="color: #40FF00">n<sup>3</sup></span> ≫
-						<span style="color: #40FF00">n<sup>2</sup></span> ≫
-						<span style="color: #40FF00">n&sdot;log(n)</span> ≫
-						<span style="color: #40FF00">n</span> ≫
-						<span style="color: #40FF00">log(n)</span> ≫
-						<span style="color: #40FF00">1</span>
+					<h4>Add DB &ldquo;index&rdquo;</h4>
+					<img src="static/images/db-index.png" width="450" height="315" />
+					<p class="fragment fade-in">
+						<span style="color: #40FF00">Search with index</span> vs
+						<span style="color: #40FF00">Search without index</span>
 					</p>
-				</section>
-
-				<section>
-					<h2>The Big Oh complexity for different functions</h2>
-					<br>
-					<img src="static/images/big-o-complexity.png" width="783" height="454" />
-				</section>
-
-				<section>
-					<h2>Growth rates of common functions measured in nanoseconds</h2>
-					<p>Each operation takes one nanosecond (10<sup>-9</sup> seconds).</p>
-					<br>
-					<img src="static/images/growth-rates-of-common-functions.jpg" width="706" height="252" />
+					<p class="fragment fade-in">
+						<span style="color: #40FF00">Binary search</span> vs
+						<span style="color: #40FF00">Linear search</span>
+					</p>
+					<p class="fragment fade-in">
+						<span style="color: #40FF00">O(log(n))</span> vs
+						<span style="color: #40FF00">O(n)</span>
+					</p>
 				</section>
 
 				<section>
@@ -456,15 +468,15 @@ def binary_search(seq, t):
 					<br>
 					<h4>Books:</h4>
 					<ul>
-						<li>"Introduction To Algorithms, Third Edition", 2009, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein</li>
-						<li>"The Algorithm Design Manual, Second Edition", 2008, by Steven S. Skiena</li>
+						<li>&ldquo;Introduction To Algorithms, Third Edition&rdquo;, 2009, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein</li>
+						<li>&ldquo;The Algorithm Design Manual, Second Edition&rdquo;, 2008, by Steven S. Skiena</li>
 					</ul>
 					<br>
 					<br>
 
 					<h4>Other:</h4>
 					<ul>
-						<li>"Algorithms: Design and Analysis" by Tim Roughgarden
+						<li>&ldquo;Algorithms: Design and Analysis&rdquo; by Tim Roughgarden
 							<br><a href="https://www.coursera.org/course/algo">https://www.coursera.org/course/algo</a>
 						</li>
 						<li>Big-O Algorithm Complexity Cheat Sheet
