@@ -42,7 +42,7 @@
 					<h1>Computational Complexity</h1>
 					<h3>by Vasyl Nakvasiuk, 2013</h3>
 
-					<img src="static/images/hangout-logo.png" style="width: 15.0%;border: 0;margin: 0;background: none;box-shadow: none;">
+					<img src="static/images/hangout-logo.png" width="200" height="117" style="border: 0; margin: 0; background: none; box-shadow: none;">
 				</section>
 
 				<section>
@@ -112,7 +112,7 @@
 import time
 
 start = time.time() # Return the time in seconds since the epoch.
-my_algo()
+my_algo(some_input)
 end = time.time()
 
 print(end - start)
@@ -128,10 +128,10 @@ print(end - start)
 					<pre class="fragment fade-in"><code class="python">
 import timeit
 
-timeit.timeit('my_algo()')
+timeit.timeit('my_algo(some_input)', number=1000)
 					</code></pre>
 					<pre class="fragment fade-in"><code>
-10 loops, best of 3: 50.3 ms per loop
+1000 loops, best of 3: 50.3 ms per loop
 					</code></pre>
 				</section>
 
@@ -144,20 +144,20 @@ import timeit
 inputs = [1000, 10000, 500000, 1000000]
 
 for input in inputs:
-    timeit.timeit('my_algo(input)')
+    timeit.timeit('my_algo(input)', number=1000)
 					</code></pre>
 					<pre class="fragment fade-in"><code>
 list of 1000 items:
-10 loops, best of 3: 50.3 ms per loop
+1000 loops, best of 3: 50.3 ms per loop
 
 list of 10000 items:
-10 loops, best of 3: 104.7 ms per loop
+1000 loops, best of 3: 104.7 ms per loop
 
 list of 500000 items:
-10 loops, best of 3: 459.1 ms per loop
+1000 loops, best of 3: 459.1 ms per loop
 
 list of 1000000 items:
-10 loops, best of 3: 3.12 s per loop
+1000 loops, best of 3: 3.12 s per loop
 					</code></pre>
 				</section>
 
@@ -172,20 +172,20 @@ import timeit
 inputs = [1000, 10000, 500000, 1000000]
 
 for input in inputs:
-    timeit.timeit('my_algo(input)')
+    timeit.timeit('my_algo(input)', number=1000)
 					</code></pre>
 					<pre class="fragment fade-in"><code>
-list on 1000 items:
-10 loops, best of 3: 50.3 ms per loop
+list of 1000 items:
+1000 loops, best of 3: 50.3 ms per loop
 
-list on 10000 items:
-10 loops, best of 3: 104.7 ms per loop
+list of 10000 items:
+1000 loops, best of 3: 104.7 ms per loop
 
-list on 500000 items:
-10 loops, best of 3: 459.1 ms per loop
+list of 500000 items:
+1000 loops, best of 3: 459.1 ms per loop
 
-list on 1000000 items:
-10 loops, best of 3: 3.12 s per loop
+list of 1000000 items:
+1000 loops, best of 3: 3.12 s per loop
 					</code></pre>
 				</section>
 
@@ -267,7 +267,7 @@ def linear_search(my_item, items):
 					<h2>The Big Oh Notation</h2>
 					<h3>Asymptotic upper bound</h3>
 					<br>
-					<p>O(g(n)) = {f(n): there exist positive constants c and n<sub>0</sub> such that 0 &le; f(n) &le; c&sdot;g(n) for all n &ge; n<sub>0</sub>}</p>
+					<p>O(g(n)) = {f(n): there exist positive constants c and n<sub>0</sub> such that <span style="color: #40FF00">0 &le; f(n) &le; c&sdot;g(n)</span> for all n &ge; n<sub>0</sub>}</p>
 					<br>
 					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> &isin; O(g(n))</p>
 					<p class="fragment fade-in">or</p>
@@ -278,7 +278,7 @@ def linear_search(my_item, items):
 					<h2>&Omega;-Notation</h2>
 					<h3>Asymptotic lower bound</h3>
 					<br>
-					<p>&Omega;(g(n)) = {f(n): there exist positive constants c and n<sub>0</sub> such that 0 &le; c&sdot;g(n) &le; f(n) for all n &ge; n<sub>0</sub>}</p>
+					<p>&Omega;(g(n)) = {f(n): there exist positive constants c and n<sub>0</sub> such that <span style="color: #40FF00">0 &le; c&sdot;g(n) &le; f(n)</span> for all n &ge; n<sub>0</sub>}</p>
 					<br>
 					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> &isin; &Omega;(g(n))</p>
 					<p class="fragment fade-in">or</p>
@@ -289,7 +289,7 @@ def linear_search(my_item, items):
 					<h2>&Theta;-Notation</h2>
 					<h3>Asymptotic tight bound</h3>
 					<br>
-					<p>&Theta;(g(n)) = {f(n): there exist positive constants c<sub>1</sub>, c<sub>2</sub> and n<sub>0</sub> such that 0 &le; c<sub>1</sub>&sdot;g(n) &le; f(n) &le; c<sub>2</sub>&sdot;g(n) for all n &ge; n<sub>0</sub>}</p>
+					<p>&Theta;(g(n)) = {f(n): there exist positive constants c<sub>1</sub>, c<sub>2</sub> and n<sub>0</sub> such that <span style="color: #40FF00">0 &le; c<sub>1</sub>&sdot;g(n) &le; f(n) &le; c<sub>2</sub>&sdot;g(n)</span> for all n &ge; n<sub>0</sub>}</p>
 					<br>
 					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> &isin; &Theta;(g(n))</p>
 					<p class="fragment fade-in">or</p>
@@ -307,12 +307,14 @@ def linear_search(my_item, items):
 					<br>
 					<p>
 						<span style="color: #40FF00">3&sdot;n<sup>2</sup> - 100&sdot;n + 6 = O(n<sup>2</sup>)</span>,<br>
-						because we can choose <span style="color: #FA5858">c = 3</span> and <span style="color: #40FF00">3&sdot;n<sup>2</sup></span> > <span style="color: #40FF00">3&sdot;n<sup>2</sup> - 100&sdot;n + 6</span>
+						because we can choose <span style="color: #FA5858">c = 3</span> and<br>
+						<span style="color: #40FF00">3&sdot;n<sup>2</sup></span> > <span style="color: #40FF00">3&sdot;n<sup>2</sup> - 100&sdot;n + 6</span>
 					</p>
 					<br>
 					<p>
 						<span style="color: #40FF00">100&sdot;n<sup>2</sup> - 70&sdot;n - 1 = O(n<sup>2</sup>)</span>,<br>
-						because we can choose <span style="color: #FA5858">c = 100</span> and <span style="color: #40FF00">100&sdot;n<sup>2</sup></span> > <span style="color: #40FF00">100&sdot;n<sup>2</sup> - 70&sdot;n - 1</span>
+						because we can choose <span style="color: #FA5858">c = 100</span> and<br>
+						<span style="color: #40FF00">100&sdot;n<sup>2</sup></span> > <span style="color: #40FF00">100&sdot;n<sup>2</sup> - 70&sdot;n - 1</span>
 					</p>
 					<br>
 					<p class="fragment fade-in">
@@ -323,10 +325,18 @@ def linear_search(my_item, items):
 				</section>
 
 				<section>
-					<h2>Linear search (Villabajo version)</h2>
+					<h2>Linear search</h2>
 					<br>
-					<h3>Linear search</h3>
-					<pre><code class="python">
+
+					<div class="fragment fade-in">
+						<h4>Linear search (Villarriba version):</h4>
+						<p><span style="color: #40FF00">T(n)</span> = O(n)</p>
+					</div>
+					<br>
+
+					<div class="fragment fade-in">
+						<h4>Linear search (Villabajo version)</h4>
+						<pre><code class="python">
 def linear_search(my_item, items):
     for position, item in enumerate(items):
         print('poition – {0}, item – {0}'.format(position, item))
@@ -335,10 +345,10 @@ def linear_search(my_item, items):
             print('Yeah!!!')
             print('The end!')
             return position
-					</code></pre>
+						</code></pre>
+					</div>
 
-					<br>
-					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = O(3&sdot;n + 2) = O(n)</p>
+					<p class="fragment fade-in"><span style="color: #40FF00">T(n)</span> = O(3&sdot;n + 2)<span class="fragment fade-in"> = O(n)</span></p>
 					<p class="fragment fade-in">
 						Speed of <span style="color: #40FF00">"Villarriba version"</span> &asymp;
 						Speed of <span style="color: #40FF00">"Villabajo version"</span>
@@ -367,7 +377,7 @@ def binary_search(seq, t):
 				</section>
 
 				<section>
-					<h2>Real usage</h2>
+					<h2>Practical usage</h2>
 					<h3>Add DB &ldquo;index&rdquo;</h3>
 					<br>
 					<img src="static/images/db-index.png" width="532" height="378" />
@@ -377,6 +387,19 @@ def binary_search(seq, t):
 				<section>
 					<h2>Types of Order</h2>
 					<img src="static/images/types-of-order.png" width="824" height="445" />
+					<br>
+					<br>
+					<p>However, all you really need to understand is that:</p>
+					<p>
+						<span style="color: #40FF00">n!</span> ≫
+						<span style="color: #40FF00">2&sdot;n</span> ≫
+						<span style="color: #40FF00">n<sup>3</sup></span> ≫
+						<span style="color: #40FF00">n<sup>2</sup></span> ≫
+						<span style="color: #40FF00">n&sdot;log(n)</span> ≫
+						<span style="color: #40FF00">n</span> ≫
+						<span style="color: #40FF00">log(n)</span> ≫
+						<span style="color: #40FF00">1</span>
+					</p>
 				</section>
 
 				<section>
@@ -389,14 +412,13 @@ def binary_search(seq, t):
 					<h2>Growth rates of common functions measured in nanoseconds</h2>
 					<p>Each operation takes one nanosecond (10<sup>-9</sup> seconds).</p>
 					<br>
-					<img src="static/images/growth-rates-of-common-functions.jpg" width="871" height="283" />
+					<img src="static/images/growth-rates-of-common-functions.jpg" width="706" height="252" />
 				</section>
 
 				<section>
 					<h2>How can you quickly find out complexity?</h2>
 					<h3>O(?)</h3>
-					<br>
-					<img class="fragment fade-in" src="static/images/joda-feel.jpg" width="400" height="398" />
+					<img class="fragment fade-in" src="static/images/joda-feel.jpg" width="450" height="448" />
 				</section>
 
 				<section>
@@ -464,7 +486,7 @@ def binary_search(seq, t):
 					<br>
 					<br>
 					<h3 style="color: #40FF00">This presentation:</h3>
-					<a href="http://vaxxxa.github.io/talks/">http://vaxxxa.github.io/talks/</a>
+					<a href="https://github.com/vaxXxa/talks">https://github.com/vaxXxa/talks</a>
 				</section>
 
 			</div>
