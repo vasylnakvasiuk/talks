@@ -4,15 +4,15 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Introduction to Algorithms: Sorting</title>
+		<title>Go concurrency model</title>
 
-		<meta name="description" content="Introduction to Algorithms: Sorting">
-		<meta name="author" content="Vasyl Nakvasiuk">
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
 		<link rel="stylesheet" href="../reveal.js/css/theme/default.css" id="theme">
@@ -20,9 +20,14 @@
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<!-- Include the appropriate print stylesheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="../reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.media = 'print';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild(link);
 		</script>
 
 		<!--[if lt IE 9]>
@@ -36,46 +41,13 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-
 				<section>
-					<h1>Introduction to Algorithms:</h1>
-					<h1>Sorting</h1>
+					<h1>Go concurrency model</h1>
 					<h3>by Vasyl Nakvasiuk, 2014</h3>
-
-					<img src="static/images/hangout-logo.png" width="200" height="117" style="border: 0; margin: 0; background: none; box-shadow: none;">
-				</section>
-
-				<section>
-					<h1>Sorting</h1>
-				</section>
-
-				<section>
-					<h2>Summary</h2>
-					<ol>
-						<li></li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Links</h2>
-					<br>
-					<h4>Books:</h4>
-					<ul>
-						<li>&ldquo;Introduction To Algorithms, Third Edition&rdquo;, 2009, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein</li>
-						<li>&ldquo;The Algorithm Design Manual, Second Edition&rdquo;, 2008, by Steven S. Skiena</li>
-					</ul>
-					<br>
-					<br>
-
-					<h4>Other:</h4>
-					<ul>
-						<li>&ldquo;Algorithms: Design and Analysis&rdquo; by Tim Roughgarden
-							<br><a href="https://www.coursera.org/course/algo">https://www.coursera.org/course/algo</a>
-						</li>
-						<li>Big-O Algorithm Complexity Cheat Sheet
-							<br><a href="http://bigocheatsheet.com/">http://bigocheatsheet.com/</a>
-						</li>
-					</ul>
+					<p style="margin-top: 100px;">
+						<img src="static/images/gopherway.png" width="72" height="72" style="border: 0; margin: 0; background: none; box-shadow: none;"><br />
+						<h4>Kyiv Go Meetup #1</h4>
+					</p>
 				</section>
 
 				<section>
@@ -119,7 +91,7 @@
 				center: true,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
