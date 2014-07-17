@@ -331,10 +331,20 @@
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
-					<h2>Software Transactional Memory (STM)</h2>
+					<h2>STM</h2>
 					<br />
 					<h3>TODO</h3>
 					<h3>TODO</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>STM: Wrap-Up</h2>
+					<br />
+					<h3 style="color: #17FF2E">Strengths</h3>
+					<h4 style="color: #17FF2E">TODO</h4>
+					<br />
+					<h3 style="color: #FF2C2D">Weaknesses</h3>
+					<h4 style="color: #FF2C2D">TODO</h4>
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
@@ -414,6 +424,73 @@
 					<h4 style="color: #FF2C2D">Overflowing an actor’s mailbox</h4>
 				</section>
 
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h1>Communicating Sequential Processes (CSP)</h1>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Communicating Sequential Processes (CSP)</h2>
+					<br />
+					<h3>Sir Charles Antony Richard Hoare (1978)</h3>
+					<h3>Similar to the Actor model</h3>
+					<h3>Focus on the channels</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>CSP: Channels</h2>
+					<br />
+					<div class="fragment">
+						<h3>Channels (thread-safe queue)</h3>
+						<pre><code>
+    ch := make(chan int)
+						</code></pre>
+					</div>
+					<br />
+					<div class="fragment">
+						<h3>Buffering</h3>
+						<pre><code>
+    ch := make(chan int, 100)
+						</code></pre>
+					</div>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>CSP</h2>
+					<br />
+					<h3>Goroutines</h3>
+					<pre class="fragment"><code>
+    go func()
+					</code></pre>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>CSP</h2>
+					<h3>Example</h3>
+
+					<pre class="fragment"><code>
+    func main() {
+        jobs := make(chan Job)
+        done := make(chan bool, len(jobList))
+
+        go func() {
+            for _, job := range jobList {
+                jobs <- job // Blocks waiting for a receive
+            }
+            close(jobs)
+        }()
+
+        go func() {
+            for job := range jobs { // Blocks waiting for a send
+            fmt.Println(job) // Do one job
+            done <- true }
+        }()
+
+        for i := 0; i < len(jobList); i++ {
+            <-done // Blocks waiting for a receive
+        }
+    }
+					</code></pre>
+				</section>
 
 
 
@@ -439,6 +516,9 @@
 						</li>
 						<li>&ldquo;Modern Concurrency&rdquo; by Alexey Kachayev
 							<br /><a href="http://goo.gl/Tr5USn">http://goo.gl/Tr5USn</a>
+						</li>
+						<li>A Tour of Go
+							<br /><a href="http://tour.golang.org/">http://tour.golang.org/</a>
 						</li>
 					</ul>
 				</section>
