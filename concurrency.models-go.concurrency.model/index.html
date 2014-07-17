@@ -16,6 +16,7 @@
 
 		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
 		<link rel="stylesheet" href="../reveal.js/css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="static/css/styles.css">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
@@ -45,7 +46,7 @@
 					<h1>Concurrency models: Go concurrency model</h1>
 					<h3>by Vasyl Nakvasiuk, 2014</h3>
 					<p style="margin-top: 100px;">
-						<img src="static/images/gopherway.png" width="72" height="72" style="border: 0; margin: 0; background: none; box-shadow: none;"><br />
+						<img src="static/images/gopherway.png" width="72" height="72" style="border: 0; margin: 0; background: none; box-shadow: none;" /><br />
 						<h4>Kyiv Go Meetup #1</h4>
 					</p>
 				</section>
@@ -56,7 +57,7 @@
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
-					<br>
+					<br />
 					<h3>The world is object oriented</h3>
 					<h3 class="fragment">The world is <span style="color: #40FF00">parallel</span></h3>
 					<h3 class="fragment">The world is <span style="color: #40FF00">object oriented</span> and <span style="color: #40FF00">parallel</span></h3>
@@ -64,7 +65,7 @@
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
-					<br>
+					<br />
 					<blockquote class="fragment">
 						Concurrency is a composition of independently computing things.
 					</blockquote>
@@ -78,13 +79,13 @@
 					<blockquote class="fragment">
 						Parallelism is about doing lots of things at once.
 					</blockquote>
-					<br>
+					<br />
 					<p class="fragment" style="font-size: 20px;">Rob Pike, "Concurrency Is Not Parallelism", 2012</p>
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
-					<br>
+					<br />
 					<h3>Concurrent</h3>
 					<h3>Concurrent and parallel</h3>
 					<h3>Parallel</h3>
@@ -92,7 +93,7 @@
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
-					<br>
+					<br />
 					<h3 class="fragment grow highlight-green">Multicore</h3>
 					<h3>Networks</h4>
 					<h3>Users</h4>
@@ -100,7 +101,7 @@
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
-					<br>
+					<br />
 					<h3>Moore’s law</h3>
 					<h3>CPU: Why are stalled?</h3>
 				</section>
@@ -108,51 +109,257 @@
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
 					<h3>Shared memory</h3>
-					<img src="static/images/shared-memory.png" style="border: 0; margin: 0; background: none; box-shadow: none;">
+					<img src="static/images/shared-memory.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
 					<h3>Distributed memory</h3>
-					<img src="static/images/distributed-memory.png" style="border: 0; margin: 0; background: none; box-shadow: none;">
+					<img src="static/images/distributed-memory.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>Concurrency and Parallelism</h2>
-					<br>
+					<br />
 					<h3>Concurrent Software for a Concurrent World</h3>
 					<h3>Distributed Software for a Distributed World</h3>
 					<h3>Fault-tolerant Software for an Unpredictable World</h3>
 				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h1>Threads and Locks</h1>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks</h2>
+					<br />
+					<h3>Process</h3>
+					<h3 class="fragment">Thread</h3>
+					<img class="fragment" src="static/images/multithreaded-process.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<pre><code>
+    public class Counting {
+        public static void main(String[] args) throws InterruptedException {
+            class Counter {
+                private int count = 0;
+                public void increment() { ++count; }
+                public int getCount() { return count; }
+            }
+            final Counter counter = new Counter();
+
+            class CountingThread extends Thread {
+                public void run() {
+                    for(int x = 0; x < 10000; ++x)
+                        counter.increment();
+                }
+            }
+
+            CountingThread t1 = new CountingThread();
+            CountingThread t2 = new CountingThread();
+
+            t1.start(); t2.start();
+            t1.join(); t2.join();
+
+            System.out.println(counter.getCount());
+        }
+    }
+					</code></pre>
+					<h3 class="fragment">count <span style="color: #FF2C2D">!=</span> 10000</h3>
+</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Problems</h2>
+					<br />
+					<h3 class="fragment">Heisenbugs</h3>
+					<h3 class="fragment">Race conditions</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Locks</h2>
+					<br />
+					<h3>Mutual exclusion (mutex)</h3>
+					<h3>Semaphore</h3>
+					<h3>High-level synchronization</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Locks</h2>
+					<br />
+					<pre><code>
+    class Counter {
+        private int count = 0;
+        public synchronized void increment() { ++count; }
+        public int getCount() { return count; }
+    }
+					</code></pre>
+					<h3 class="fragment">count <span style="color: #17FF2E">==</span> 10000</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Multiple Locks</h2>
+					<br />
+					<h3>&ldquo;Dining philosophers&rdquo; problem</h3>
+					<img src="static/images/dining-philosophers.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+					<h3 class="fragment" style="color: #FF2C2D">Deadlock!</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Multiple Locks</h2>
+					<br />
+					<h3>Deadlock</h3>
+					<h3>Self-deadlock</h3>
+					<h3>Livelock</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Multiple Locks</h2>
+					<br />
+					<h3>&ldquo;Dining philosophers&rdquo; solutions</h3>
+					<h4 class="fragment">Resource hierarchy solution</h4>
+					<h4 class="fragment">Arbitrator solution</h4>
+					<h4 class="fragment">Try Lock</h4>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Wikipedia parser</h2>
+					<br />
+					<h3>What’s the most commonly used word on Wikipedia?</h3>
+					<div class="fragment">
+						<h4>&ldquo;Producer-consumer&rdquo; pattern</h4>
+						<img src="static/images/producer-consumer.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+					</div>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Threads and Locks: Wrap-Up</h2>
+					<br />
+					<h3 style="color: #17FF2E">Strengths</h3>
+					<h4 style="color: #17FF2E">&ldquo;Close to the metal&rdquo;</h4>
+					<h4 style="color: #17FF2E">Easy integration</h4>
+					<br />
+					<h3 style="color: #FF2C2D">Weaknesses</h3>
+					<h4 style="color: #FF2C2D">No parallelism</h4>
+					<h4 style="color: #FF2C2D">Only shared-memory architectures</h4>
+					<h4 style="color: #FF2C2D">Hard to manage</h4>
+					<h4 style="color: #FF2C2D">Hard to testing</h4>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h1>Functional Programming</h1>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Functional Programming</h2>
+					<br />
+					<h3>Immutable state</h3>
+					<h3>Effortless Parallelism</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Functional Programming: Sum</h2>
+					<br />
+					<pre><code>
+    (defn reduce-sum [numbers]
+        (reduce (fn [acc x] (+ acc x)) 0 numbers))
+					</code></pre>
+
+					<pre class="fragment"><code>
+    (defn sum [numbers]
+       (reduce + numbers))
+					</code></pre>
+
+					<pre class="fragment"><code>
+    (ns sum.core
+        (:require [clojure.core.reducers :as r]))
+
+    (defn parallel-sum [numbers]
+        (r/fold + numbers))
+					</code></pre>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Functional Programming: Wikipedia parser</h2>
+					<br />
+					<pre class="fragment"><code>
+    (defn count-words-sequential [pages]
+        (frequencies (mapcat get-words pages)))
+					</code></pre>
+
+					<pre class="fragment"><code>
+    (pmap #(frequencies (get-words %)) pages)
+					</code></pre>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Functional Programming: Divide and Conquer</h2>
+					<pre class="fragment"><code>
+    (ns sum.core
+        (:require [clojure.core.reducers :as r]))
+
+    (defn parallel-sum [numbers]
+        (r/fold + numbers))
+					</code></pre>
+					<img class="fragment" src="static/images/divide-and-conquer.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Functional Programming: Referential Transparency</h2>
+					<pre class="fragment"><code>
+    (+ (+ 1 2) (+ 3 4)) → (+ (+ 1 2) 7) → (+ 3 7) → 10
+					</code></pre>
+					<pre class="fragment"><code>
+    (+ (+ 1 2) (+ 3 4)) → (+ 3 (+ 3 4)) → (+ 3 7) → 10
+					</code></pre>
+					<img class="fragment" src="static/images/dataflow.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Functional Programming: Wrap-Up</h2>
+					<br />
+					<h3 style="color: #17FF2E">Strengths</h3>
+					<h4 style="color: #17FF2E">Referential Transparency</h4>
+					<h4 style="color: #17FF2E">No mutable state</h4>
+					<br />
+					<h3 style="color: #FF2C2D">Weaknesses</h3>
+					<h4 style="color: #FF2C2D">Less efficient than its imperative equivalent</h4>
+				</section>
+
+
+
+
+
+
 
 
 
 
 				<section>
 					<h2>Links</h2>
-					<br>
+					<br />
 					<h4>Books:</h4>
 					<ul>
 						<li>&ldquo;Seven Concurrency Models in Seven Weeks&rdquo;, 2014, by Paul Butcher</li>
 						<li>Hoar</li>
 					</ul>
-					<br>
-					<br>
+					<br />
+					<br />
 
 					<h4>Other:</h4>
 					<ul>
 						<li>&ldquo;Concurrency Is Not Parallelism&rdquo; by Rob Pike
-							<br><a href="http://goo.gl/hyFmcZ">http://goo.gl/hyFmcZ</a>
+							<br /><a href="http://goo.gl/hyFmcZ">http://goo.gl/hyFmcZ</a>
 						</li>
 						<li>&ldquo;Modern Concurrency&rdquo; by Alexey Kachayev
-							<br><a href="http://goo.gl/Tr5USn">http://goo.gl/Tr5USn</a>
+							<br /><a href="http://goo.gl/Tr5USn">http://goo.gl/Tr5USn</a>
 						</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>The end</h2>
-					<br>
+					<br />
 					<h3 style="color: #FA5858">Thank you for attention!</h3>
 					<ul>
 						<li>Vasyl Nakvasiuk</li>
@@ -160,8 +367,8 @@
 						<li>Twitter: @vaxXxa</li>
 						<li>Github: vaxXxa</li>
 					</ul>
-					<br>
-					<br>
+					<br />
+					<br />
 					<h3 style="color: #40FF00">This presentation:</h3>
 					<p>
 						Source:
