@@ -326,7 +326,93 @@
 					<h4 style="color: #FF2C2D">Less efficient than its imperative equivalent</h4>
 				</section>
 
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h1>Software Transactional Memory (STM)</h1>
+				</section>
 
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Software Transactional Memory (STM)</h2>
+					<br />
+					<h3>TODO</h3>
+					<h3>TODO</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h1>Actor model</h1>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Actor model</h2>
+					<br />
+					<h3>Carl Hewitt (1973)</h3>
+					<h3>Actor – lightweight process</h3>
+					<h3>Messages and Mailboxes</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Actor model</h2>
+					<pre class="fragment"><code>
+    defmodule Talker do
+        def loop do
+            receive do
+                {:greet, name} -> IO.puts("Hello, #{name}")
+                {:bye, name, honorific} -> IO.puts("Bye, #{honorific} #{name}")
+            end
+            loop
+        end
+    end
+					</code></pre>
+
+					<pre class="fragment"><code>
+    pid = spawn(&Talker.loop/0)
+
+    send(pid, {:greet, "Gopher"})
+    send(pid, {:bye, "Mrs", "Pike"})
+
+    sleep(1000)
+					</code></pre>
+
+					<pre class="fragment"><code>
+    Hello, Gopher
+    Bye, Mrs Pike
+					</code></pre>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Actor model</h2>
+					<br />
+					<h3>Pattern matching</h3>
+					<h3>Bidirectional Communication</h3>
+					<h3>Naming Processes</h3>
+					<h3>Supervising a Process</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Actor model</h2>
+					<br />
+					<h3>Distribution</h3>
+					<h3>Cluster</h3>
+					<h3>Remote Messaging</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Actor model: Wikipedia parser</h2>
+					<br />
+					<img src="static/images/actors-wikipedia-parser.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Actor model: Wrap-Up</h2>
+					<br />
+					<h3 style="color: #17FF2E">Strengths</h3>
+					<h4 style="color: #17FF2E">Messaging and Encapsulation</h4>
+					<h4 style="color: #17FF2E">Fault Tolerance</h4>
+					<h4 style="color: #17FF2E">Distributed Programming</h4>
+					<br />
+					<h3 style="color: #FF2C2D">Weaknesses</h3>
+					<h4 style="color: #FF2C2D">We still have deadlocks</h4>
+					<h4 style="color: #FF2C2D">Overflowing an actor’s mailbox</h4>
+				</section>
 
 
 
