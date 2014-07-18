@@ -333,18 +333,47 @@
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>STM</h2>
 					<br />
-					<h3>TODO</h3>
-					<h3>TODO</h3>
+					<h3>Mutable State</h3>
+					<h3>CAS (compare-and-swap)</h3>
+					<h3>Transactions are atomic, consistent, and isolated</h3>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>STM</h2>
+					<br />
+					<pre><code>
+    (defn transfer [from to amount]
+        (dosync
+            (alter from - amount)
+            (alter to + amount)))
+					</code></pre>
+					<pre class="fragment"><code>
+    user=> (def checking (ref 1000))
+    #'user/checking
+
+    user=> (def savings (ref 2000))
+    #'user/savings
+
+    user=> (transfer savings checking 100)
+    1100
+
+    user=> @checking
+    1100
+
+    user=> @savings
+    1900
+					</code></pre>
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
 					<h2>STM: Wrap-Up</h2>
 					<br />
 					<h3 style="color: #17FF2E">Strengths</h3>
-					<h4 style="color: #17FF2E">TODO</h4>
+					<h4 style="color: #17FF2E">Easy to use</h4>
 					<br />
 					<h3 style="color: #FF2C2D">Weaknesses</h3>
-					<h4 style="color: #FF2C2D">TODO</h4>
+					<h4 style="color: #FF2C2D">Retrying Transactions</h4>
+					<h4 style="color: #FF2C2D">Speed</h4>
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
@@ -434,24 +463,13 @@
 					<h3>Sir Charles Antony Richard Hoare (1978)</h3>
 					<h3>Similar to the Actor model</h3>
 					<h3>Focus on the channels</h3>
-				</section>
-
-				<section data-background="#4d7e65" data-background-transition="slide">
-					<h2>CSP: Channels</h2>
 					<br />
 					<div class="fragment">
-						<h3>Channels – thread-safe queue</h3>
-						<h3>Channels – first class object</h3>
-						<pre><code>
-    ch := make(chan int)
-						</code></pre>
-					</div>
-					<br />
-					<div class="fragment">
-						<h3>Buffering</h3>
-						<pre><code>
-    ch := make(chan int, 100)
-						</code></pre>
+						<blockquote>
+							Do not communicate by sharing memory, instead share memory by communicating
+						</blockquote>
+						<br />
+						<p style="font-size: 20px;">Rob Pike</p>
 					</div>
 				</section>
 
@@ -459,9 +477,43 @@
 					<h2>CSP</h2>
 					<br />
 					<h3>Goroutines</h3>
+					<br />
+					<h4>It's very cheap</h4>
+					<h4>It's not a thread</h4>
+					<h4>Cooperative scheduler</h4>
+					<h4>Multithreading</h4>
+					<h4>Multicore</h4>
 					<pre class="fragment"><code>
     go func()
 					</code></pre>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>CSP: Channels</h2>
+					<br />
+					<div>
+						<h4>Channels – thread-safe queue</h4>
+						<h4>Channels – first class object</h4>
+					</div>
+					<div class="fragment">
+						<pre><code>
+    // Declaring and initializing
+    var ch chan int
+    ch = make(chan int)
+    // or
+    ch := make(chan int)
+    // Buffering
+    ch := make(chan int, 100)
+						</code></pre>
+						<pre><code>
+    // Sending on a channel
+    ch <- 1
+						</code></pre>
+						<pre><code>
+    // Receiving from a channel
+    value = <- ch
+						</code></pre>
+					</div>
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
