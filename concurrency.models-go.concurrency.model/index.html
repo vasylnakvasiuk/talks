@@ -366,7 +366,7 @@
         def loop do
             receive do
                 {:greet, name} -> IO.puts("Hello, #{name}")
-                {:bye, name, honorific} -> IO.puts("Bye, #{honorific} #{name}")
+                {:bye, status, name} -> IO.puts("Bye, #{status} #{name}")
             end
             loop
         end
@@ -440,7 +440,8 @@
 					<h2>CSP: Channels</h2>
 					<br />
 					<div class="fragment">
-						<h3>Channels (thread-safe queue)</h3>
+						<h3>Channels – thread-safe queue</h3>
+						<h3>Channels – first class object</h3>
 						<pre><code>
     ch := make(chan int)
 						</code></pre>
