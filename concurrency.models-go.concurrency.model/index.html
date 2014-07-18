@@ -468,7 +468,6 @@
 						<blockquote>
 							Do not communicate by sharing memory, instead share memory by communicating
 						</blockquote>
-						<br />
 						<p style="font-size: 20px;">Rob Pike</p>
 					</div>
 				</section>
@@ -477,15 +476,19 @@
 					<h2>CSP</h2>
 					<br />
 					<h3>Goroutines</h3>
-					<br />
 					<h4>It's very cheap</h4>
 					<h4>It's not a thread</h4>
 					<h4>Cooperative scheduler</h4>
-					<h4>Multithreading</h4>
-					<h4>Multicore</h4>
+					<h4>Multithreading, multicore</h4>
 					<pre class="fragment"><code>
     go func()
 					</code></pre>
+					<div class="fragment">
+						<blockquote>
+							Just looked at a Google-internal Go server with 139K goroutines serving over 68K active network connections. Concurrency wins.
+						</blockquote>
+						<p style="font-size: 20px;">@rob_pike</p>
+					</div>
 				</section>
 
 				<section data-background="#4d7e65" data-background-transition="slide">
@@ -534,8 +537,9 @@
 
         go func() {
             for job := range jobs { // Blocks waiting for a send
-            fmt.Println(job) // Do one job
-            done <- true }
+                fmt.Println(job) // Do one job
+                done <- true
+            }
         }()
 
         for i := 0; i < len(jobList); i++ {
@@ -545,6 +549,28 @@
 					</code></pre>
 				</section>
 
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>CSP: Wrap-Up</h2>
+					<br />
+					<h3 style="color: #17FF2E">Strengths</h3>
+					<h4 style="color: #17FF2E">Flexibility</h4>
+					<h4 style="color: #17FF2E">No channel overflowing</h4>
+					<br />
+					<h3 style="color: #FF2C2D">Weaknesses</h3>
+					<h4 style="color: #FF2C2D">We can have deadlocks</h4>
+				</section>
+
+				<section data-background="#4d7e65" data-background-transition="slide">
+					<h2>Go concurrency: Wrap-Up</h2>
+					<br />
+					<h3 style="color: #17FF2E">Strengths</h3>
+					<h4 style="color: #17FF2E">Message passing</h4>
+					<h4 style="color: #17FF2E">Still have low-level synchronization</h4>
+					<h4 style="color: #17FF2E">Don't worry about threads, processes</h4>
+					<br />
+					<h3 style="color: #FF2C2D">Weaknesses</h3>
+					<h4 class="fragment" style="color: #FF2C2D">nil</h4>
+				</section>
 
 
 
