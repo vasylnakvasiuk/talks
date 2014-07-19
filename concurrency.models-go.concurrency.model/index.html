@@ -290,6 +290,12 @@
 					<pre class="fragment"><code>
     (pmap #(frequencies (get-words %)) pages)
 					</code></pre>
+
+					<pre class="fragment"><code>
+    (defn count-words-parallel [pages]
+        (reduce (partial merge-with +)
+            (pmap #(frequencies (get-words %)) pages)))
+					</code></pre>
 				</section>
 
 				<section data-background="#4d7e65">
