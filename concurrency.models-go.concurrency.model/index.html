@@ -348,19 +348,17 @@
             (alter to + amount)))
 					</code></pre>
 					<pre class="fragment"><code>
-    user=> (def checking (ref 1000))
-    #'user/checking
+    => (def user1 (ref 1000))
 
-    user=> (def savings (ref 2000))
-    #'user/savings
+    => (def user2 (ref 2000))
 
-    user=> (transfer savings checking 100)
+    => (transfer user2 user1 100)
     1100
 
-    user=> @checking
+    => @checking
     1100
 
-    user=> @savings
+    => @savings
     1900
 					</code></pre>
 				</section>
@@ -435,12 +433,6 @@
 				</section>
 
 				<section data-background="#4d7e65">
-					<h2>Actor model: Wikipedia parser</h2>
-					<br />
-					<img src="static/images/actors-wikipedia-parser.png" style="border: 0; margin: 0; background: none; box-shadow: none;" />
-				</section>
-
-				<section data-background="#4d7e65">
 					<h2>Actor model: Wrap-Up</h2>
 					<br />
 					<h3 style="color: #17FF2E">Strengths</h3>
@@ -478,7 +470,7 @@
 					<h3>Goroutines</h3>
 					<h4>It's very cheap</h4>
 					<h4>It's not a thread</h4>
-					<h4>Cooperative scheduler</h4>
+					<h4>Cooperative scheduler vs Preemptive scheduler</h4>
 					<h4>Multithreading, multicore</h4>
 					<pre class="fragment"><code>
     go func()
@@ -572,10 +564,13 @@
 					<h4 class="fragment" style="color: #FF2C2D">nil</h4>
 				</section>
 
-
-
-
-
+				<section data-background="#4d7e65">
+					<h2>Wrapping Up</h2>
+					<br />
+					<h3>The Future Is Immutable</h3>
+					<h3>The Future Is Distributed</h3>
+					<h3>The Future with Big Data</h3>
+				</section>
 
 				<section>
 					<h2>Links</h2>
