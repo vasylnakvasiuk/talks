@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Learning Vim: Beginner advice and lessons learned</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/white.css">
+
+		<!--[if lt IE 9]>
+		<script src="../reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#3d849c">
+					<h1>Learning Vim: Beginner advice and lessons learned</h1>
+					<h3>by Vasyl Nakvasiuk, 2016</h3>
+					<h3>@vaxxxa</h3>
+					<p style="margin-top: 100px;">
+						<img src="static/images/vim-logo.png" width="72" height="72" style="border: 0; margin: 0; background: none; box-shadow: none;" />
+						<img src="static/images/neovim-logo.png" width="72" height="72" style="border: 0; margin: 0; background: none; box-shadow: none;" /><br />
+					</p>
+				</section>
+
+				<section data-background="#3d849c">
+					<h1>Vi</h1>
+					<h3>(Bill Joy, 1976)</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h1>Vim</h1>
+					<h3>(Bram Moolenaar 1991)</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Why Vim?</h2>
+					<br />
+					<h3 class="fragment">Highly customizable</h3>
+					<h3 class="fragment">Runs everywhere</h3>
+					<h3 class="fragment">Try something new</h3>
+					<h3 class="fragment">Investing in yourself</h3>
+					<h3 class="fragment">Feel quite at home</h3>
+					<h3 class="fragment">Have fun</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h1>Vim modes</h1>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Vim modes</h2>
+					<br />
+					<h3 class="fragment" style="color: #000080">Normal mode</h3>
+					<h3 class="fragment" style="color: #0f540f">Insert mode</h3>
+					<h3 class="fragment" style="color: #ddc42c">Visual mode</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Yummy features</h2>
+					<br />
+					<h3>Operator + Text object</h3>
+					<h3>The DOT command</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Operators</h2>
+					<br />
+					<ul>
+						<li><strong style="color: black;">d</strong> – delete (also cut)</li>
+						<li><strong style="color: black;">c</strong> – change (delete, then place in insert mode)</li>
+						<li><strong style="color: black;">y</strong> – yank (copy)</li>
+						<li><strong style="color: black;">v</strong> – visually select</li>
+					</ul>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Text object</h2>
+					<br />
+					<h3>Text object prefix</h3>
+					<ul>
+						<li><strong style="color: black;">a</strong> – select "a"n object</li>
+						<li><strong style="color: black;">i</strong> – select an "inner" object</li>
+					</ul>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Text object</h2>
+					<br />
+					<h3>Object</h3>
+					<ul>
+						To open Chrome DevTools, use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+
+<kbd>I</kbd> (or <kbd>Cmd</kbd>+<kbd>Opt</kbd>+<kbd>I</kbd> on Mac).
+						<li><strong style="color: black;">w</strong> – word</li>
+						<li><strong style="color: black;">W</strong> – WORD</li>
+						<li><strong style="color: black;">s</strong> – sentence</li>
+						<li><strong style="color: black;">p</strong> – paragraph</li>
+						<li><strong style="color: black;">]</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">[</strong> – [] block</li>
+						<li><strong style="color: black;">)</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">(</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">b</strong> – () block</li>
+						<li><strong style="color: black;">&gt;</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">&lt;</strong> – &lt;&gt; block</li>
+						<li><strong style="color: black;">}</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">{</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">B</strong> – {} block</li>
+						<li><strong style="color: black;">t</strong> – tag block</li>
+						<li><strong style="color: black;">'</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">"</strong>&nbsp;&nbsp;&nbsp;<strong style="color: black;">`</strong> – quoted string</li>
+					</ul>
+				</section>
+
+				<section data-background="#3d849c">
+					<h1>before you start, you should know</h1>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>before you start, you should know</h2>
+					<br />
+					<h3 class="fragment grow highlight-current-green">different from everything you've used before</h3>
+					<h3 class="fragment grow current-visible highlight-current-green">don't start at work</h2>
+					<h3 class="fragment grow highlight-current-green">don't use arrow keys</h3>
+					<h3 class="fragment grow highlight-current-green">break up with your mouse</h3>
+					<h3 class="fragment grow current-visible highlight-current-green">use always a better way</h3>
+					<h3 class="fragment grow highlight-current-green">don't copy someone else's configuration</h3>
+					<h3 class="fragment grow highlight-current-green">don't use 100500 plugins</h3>
+					<h3 class="fragment grow highlight-current-green">find your vim mentor/guru/jedi</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h1>Learning Vim is</h1>
+					<h1>A process, not an action</h1>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Wrapping Up</h2>
+					<br />
+					<h3>The Future Is Immutable</h3>
+					<h3>The Future Is Distributed</h3>
+					<h3>The Future with Big Data</h3>
+					<br />
+					<h3>Use right tools</h3>
+					<h3>Don't write Django/RoR by Go/Clojure/Erlang</h3>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>Links</h2>
+					<br />
+					<h4>Books:</h4>
+					<ul>
+						<li>&ldquo;Seven Concurrency Models in Seven Weeks&rdquo;, 2014, by Paul Butcher</li>
+						<li>&ldquo;Communicating Sequential Processes&rdquo;, 1978, C. A. R. Hoare</li>
+					</ul>
+					<br />
+					<br />
+
+					<h4>Other:</h4>
+					<ul>
+						<li>&ldquo;Concurrency Is Not Parallelism&rdquo; by Rob Pike
+							(<a href="http://goo.gl/hyFmcZ">http://goo.gl/hyFmcZ</a>)
+						</li>
+						<li>&ldquo;Modern Concurrency&rdquo; by Alexey Kachayev
+							(<a href="http://goo.gl/Tr5USn">http://goo.gl/Tr5USn</a>)
+						</li>
+						<li>A Tour of Go
+							(<a href="http://tour.golang.org/">http://tour.golang.org/</a>)
+						</li>
+					</ul>
+				</section>
+
+				<section data-background="#3d849c">
+					<h2>The end</h2>
+					<br />
+					<h3 style="color: #FA5858">Thank you for attention!</h3>
+					<ul>
+						<li>Vasyl Nakvasiuk</li>
+						<li>Email: vaxxxa@gmail.com</li>
+						<li>Twitter: @vaxXxa</li>
+						<li>Github: vaxXxa</li>
+					</ul>
+					<br />
+					<br />
+					<h3 style="color: #40FF00">This presentation:</h3>
+					<p>
+						Source:
+						<a href="https://github.com/vaxXxa/talks">https://github.com/vaxXxa/talks</a>
+					</p>
+					<p>
+						Live:
+						<a href="http://vaxXxa.github.io/talks">http://vaxXxa.github.io/talks</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
